@@ -1,0 +1,21 @@
+{% extends "core/base.html" %} {% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'css/homecustom.css' %}">
+<!--title-->
+<div class="section-title">
+    <h4 class="text-primary  text-uppercase" style="letter-spacing: 5px;">Deshboard/ Add Post</h4>
+</div>
+
+<!--forom-->
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}{% for f in form %}
+        <div class="mb-3">
+            {{f.label_tag}}{{f}}
+        </div>
+        {% endfor %}
+        <input type="submit" class="btn btn-outline-primary" value="ADD">
+        <a href="{% url 'deshboad' %}" class="btn btn-outline-danger">Cancel</a>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+body {
+    background-color: gray;
+}
+
+.section-title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#grid {
+    display: -webkit-inline-box;
+}
+
+#rapper {
+    margin-left: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    #box {
+        text-align: -webkit-center;
+    }
+    #profile {
+        text-align: -webkit-center;
+        font-size: xx-small;
+    }
+    table {
+        font-size: x-small;
+    }
+}

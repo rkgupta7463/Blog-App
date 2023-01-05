@@ -1,0 +1,26 @@
+{% extends "core/base.html" %} {% block content %} {% load static %}
+<!--bootstrap links-->
+<link href="{% static 'css/profileedit.css' %}" rel="stylesheet" />
+
+<style>
+    body {
+        background-color: #01dfff;
+    }
+    
+    .helptext {
+        display: none;
+    }
+</style>
+<p class="text-center fs-3 fw-bolder bg-white mt-2">Profile Edit</p>
+<!-- action="{% url 'signup' %}" -->
+<div class="container" id="form-body">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="m-3">
+            {{form}}
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Save</button>
+        <a href="{% url 'deshboad' %}" class="btn btn-danger mt-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

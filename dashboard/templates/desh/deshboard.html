@@ -1,0 +1,108 @@
+{% extends "core/base.html" %} {% block content %} {% load static %}
+
+<!--descustom css link-->
+<link href="{% static 'css/deshcustom.css' %}" rel="stylesheet" />
+<style>
+    body {
+        background-color: #e1f5fe;
+        font-size: medium;
+    }
+    
+    @media screen and (max-width: 600px) {
+        #box {
+            text-align: -webkit-center;
+        }
+        #profile {
+            text-align: -webkit-center;
+            font-size: xx-small;
+        }
+        table {
+            font-size: x-small;
+        }
+    }
+</style>
+
+<!-- Menu chart -->
+<div class="container">
+    <div class="section-title">
+        <p class="text-primary  text-uppercase fs-2" style="letter-spacing: 5px;">Profile</p>
+    </div>
+</div>
+
+<hr class="m-4">
+<div class="m-4">
+    <table class="table w-100 text-center" id="table_p">
+        <thead class="table-dark">
+            <tr>
+                <td>Register ID</td>
+                <td>Name</td>
+                <td>Username</td>
+                <td>Email Id</td>
+                {% if request.user.is_superuser %}
+                <td>Group</td>
+                {% endif %}
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% comment %}
+            <!-- {% for ud in usser_data %} -->
+            <!-- {% endfor %} -->
+            {% endcomment %}
+            <tr>
+                <td>{{usser_data.id}}</td>
+                <td>{{full_name}}</td>
+                <td>{{usser_data.username}}</td>
+                <td>{{usser_data.email}}</td>
+                {% if request.user.is_superuser %} {% for g in group %}
+                <td>{{g.name}}</td>
+                {% endfor %} {% endif %}
+                <td><a href="{% url 'add' %}" class="btn btn-outline-info mx-1 mt-1"><i class="fa-solid fa-file-circle-plus"></i></a>
+                    <a href="{% url 'home' %}" class="btn btn-outline-primary mt-1"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                    <a href="{% url 'profileedit' usser_data.id %}" class="btn btn-outline-dark mt-1"><i class="fas fa-user-edit"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr class="m-4">
+<p class="text-center fs-3 fw-bolder bg-white mx-4 my-4">Show Post Information</p>
+
+{% if post %}
+<div class="m-4">
+    <table class="table w-100 text-center" id="table_p">
+        <thead class="table-dark">
+            <tr>
+                <td scope="col" style="width: 6%;">Blog ID</td>
+                <td scope="col" style="width: 10%;">Title</td>
+                <td scope="col" style="width:55%">Description</td>
+                <td scope="col" style="width:15%">Photo</td>
+                <td scope="col" style="width: 15%;">Action</td>
+            </tr>
+        </thead>
+        {% for p in post %}
+        <tbody class="table-dark">
+            <tr>
+                <td>{{p.id}}</td>
+                <td>{{p.title}}</td>
+                <td>{{p.discription}}</td>
+                <td><img src="/media/{{p.image}}" alt="image-error" style="width: 80px;"></td>
+                <td>
+                    <a href="{% url 'update' p.id %}" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i></a> {% if perms.home.delete_posts %} {% comment %}
+                    <form action="{% url 'delete' p.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-outline-danger" value="DELETE">
+                        <!-- </a> -->
+                    </form>
+                    {% endcomment %}
+                    <a href="{% url 'delete' p.id %}" class="btn btn-outline-danger"><i class="fa-sharp fa-solid fa-trash"></i></a> {% endif %}
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+<p style="text-align: center;">No Blog Posted By You</p>
+{% endif %} {% endblock %}

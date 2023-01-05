@@ -1,0 +1,43 @@
+{% extends "core/base.html" %} {% block content %} {% load static %}
+
+<!--custom links-->
+<link rel="stylesheet" href="{% static 'css/homecustom.css' %}"> {% if user.is_authenticated %}
+<h1 class="text-center">Welcome {{request.user.username}}</h1>
+{% else %}
+<h1 class="text-center mt-4">Welcome Guest</h1>
+{% endif %}
+
+<h3 class="text-center">Posted Blogs</h3>
+<div class="m-4">
+    {% for p in post %}
+    <div class="card bg-dark rounded-3 p-3 mt-3">
+        <img src="/media/{{p.image}}" alt="image-error" style="float: right; width:200px" class="card-img-top p-2">
+        <div class="card-body">
+            <h5 class="fw-bold">{{p.title}}</h5>
+            <p>{{p.discription}}</p>
+            <p>{{p.date_time}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="m-4">
+    <nav aria-label="Page navigation example fs-5">
+        <ul class="pagination justify-content-center">
+            {% if course.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="/?page={{course.previous_page_number}}">Previous</a>
+            </li>
+            {% endif %} {% for n in totalpagelist %}
+            <li class="page-item"><a class="page-link" href="/?page={{n}}">{{n}}</a></li>
+            {% endfor %} {% if course.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="/?page={{course.next_page_number}}">Next</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="/?page={{lastpage}}">Last</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+{% endblock %}

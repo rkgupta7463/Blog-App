@@ -1,0 +1,76 @@
+{% extends "core/base.html" %} {% block content %} {% load static %}
+
+<!--descustom css link-->
+<link href="{% static 'css/deshcustom.css' %}" rel="stylesheet" />
+<style>
+    body {
+        background-color: #e1f5fe;
+        font-size: medium;
+    }
+    
+    .rap img {
+        display: block;
+        margin: auto;
+        border-radius: 50%;
+        width: 11.5%;
+        height: 24vh;
+        border: 8px solid #01080b;
+    }
+    
+    @media screen and (max-width: 600px) {
+        #box {
+            text-align: -webkit-center;
+        }
+        #profile {
+            text-align: -webkit-center;
+            font-size: xx-small;
+        }
+        table {
+            font-size: x-small;
+        }
+        .rap img {
+            display: block;
+            margin: auto;
+            border-radius: 50%;
+            width: 39.5%;
+            height: 21vh;
+            border: 8px solid #01080b;
+        }
+    }
+</style>
+
+<p class="text-center fs-3 fw-bolder bg-white mt-2 text-black">About us</p>
+
+<div class="rap">
+    <img src="{% static 'img/Sign.jpg' %}" alt="profile">
+</div>
+<div class="box">
+
+    <div class="m-4">
+        <table class="table w-100 text-center" id="table_p">
+            <thead class="table-dark">
+                <tr>
+                    <td>S.No.</td>
+                    <td>Name</td>
+                    <td>Postion</td>
+                    <td>Email Id</td>
+                    <!-- <td>Blogs</td>  -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>Rishu kumar</td>
+                    <td>Django developer & Data Scientist</td>
+                    <td>{{user.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="p-tag m-4">
+        <p style="font-weight: bold;">I'm Rishu Kumar Gupta, I am pursuing a BCA degree with a specialization in Data science at kl University Vijayawada (A P). My passion is website development. I am also a web designer and web developer.I certified Salesforce administrator and Microsoft
+            Azure Data scientist Associate. And I completed training in data science from internshala.</p>
+    </div>
+</div>
+
+{% endblock %}

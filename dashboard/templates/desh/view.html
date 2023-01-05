@@ -1,0 +1,25 @@
+{% extends "core/base.html" %} {% block content %}
+
+<style>
+    .card {
+        width: 52rem
+    }
+    
+    @media screen and (max-width:500px) {
+        .card {
+            width: 18rem
+        }
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="card" style="display: block; margin: auto;">
+        <img src="{{ posted.picture.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{posted.title}}</h5>
+            <p class="card-text">{{posted.discription}}</p>
+            <a href="{% url 'deshboad' %}" class="btn btn-primary">Back</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

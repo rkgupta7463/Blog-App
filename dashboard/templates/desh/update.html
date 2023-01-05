@@ -1,0 +1,53 @@
+{% extends "core/base.html" %} {% block content %} {% load static %}
+
+<!--custom links-->
+<link rel="stylesheet" href="{% static 'css/update.css' %}">
+
+<style>
+    body {
+        background-color: gray;
+        font-size: medium;
+    }
+</style>
+<div class="section-title">
+    <h4 class="text-primary  text-uppercase text-center m-2" style="letter-spacing: 5px;">Deshboard/ Update Post</h4>
+</div>
+</div>
+<!--form-->
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" id="title" value="{{ HF.title }}">
+        </div>
+        <div class="mb-3">
+            {% if HF.image %}
+            <img id="control-image" src="/media/{{HF.image}}"> {% endif %}
+            <br>
+            <label for="exampleFormControlInput1" class="form-label">Image Topic</label>
+            <input type="file" name="image_topic" class="form-control" id="image" value="{{ HF.image }}">
+            <p>required field</p>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Web Link</label>
+            <input type="text" name="weblink" class="form-control" id="weblink" value="{{ HF.web_site }}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Discription</label>
+            <textarea name="discription" class="form-control" id="exampleFormControlTextarea1" rows="10">{{ HF.discription }}</textarea>
+        </div>
+        <input type="submit" class="btn btn-primary m-2" value="Update Now">
+        <a href="{% url 'deshboad' %}" class="btn btn-danger">Cancel</a>
+    </form>
+</div>
+<div class="container">
+
+</div>
+
+
+</body>
+
+</html>
+
+{% endblock %}
